@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase.config';
-import { PenSquare, Trash2, ChevronRight, Search, Plus, Sparkles } from 'lucide-react';
+import { PenSquare, Trash2, ChevronRight, Search, Plus } from 'lucide-react';
 
 const NotesList = () => {
   const [notes, setNotes] = useState([]);
@@ -91,14 +91,9 @@ const NotesList = () => {
             placeholder="Search your notes..."
             value={searchQuery}
             onChange={handleSearchChange}
-            className="w-full pl-12 pr-4 py-4 bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-xl shadow-gray-200/50 transition-all duration-200"
+            className="w-full pl-12 pr-4 py-4 bg-white backdrop-blur-sm rounded-2xl border border-gray-200 focus:ring-2 shadow-xl"
           />
         </div>
-        {isLoading && (
-          <div className="flex justify-center items-center py-20">
-            <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin"></div>
-          </div>
-        )}
         {!isLoading && filteredNotes.length === 0 && (
           <div className="text-center py-20">
             {!searchQuery && (
@@ -116,11 +111,7 @@ const NotesList = () => {
           {filteredNotes.map((note, index) => (
             <div 
               key={note.id}
-              className="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
-              style={{
-                animationDelay: `${index * 100}ms`,
-                animation: 'fadeIn 0.5s ease-out forwards'
-              }}
+              className="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl shadow-gray-200 hover:shadow-2xl hover:shadow-purple-200 transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
             >
               <div className="p-6 space-y-4">
                 <div className="flex justify-between items-start">
@@ -162,7 +153,7 @@ const NotesList = () => {
       </div>
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 transform animate-in fade-in slide-in-from-bottom-4 shadow-2xl">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 transform shadow-2xl">
             <h3 className="text-2xl font-semibold text-gray-800 mb-3">Delete Note</h3>
             <p className="text-gray-600 mb-6">Are you sure you want to delete this note? This action cannot be undone.</p>
             <div className="flex justify-end gap-4">
@@ -177,7 +168,7 @@ const NotesList = () => {
               </button>
               <button
                 onClick={() => handleDelete(noteToDelete)}
-                className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white font-medium rounded-full hover:from-red-700 hover:to-red-600 transition-colors"
+                className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white font-medium rounded-full hover:bg-red-700 transition-colors"
               >
                 Delete
               </button>
@@ -185,19 +176,6 @@ const NotesList = () => {
           </div>
         </div>
       )}
-
-      <style>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };

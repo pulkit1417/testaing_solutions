@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase.config';
-import { ArrowLeft, Edit3, Trash2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Edit3, Trash2 } from 'lucide-react';
 
 const ViewNote = () => {
   const [note, setNote] = useState(null);
@@ -51,19 +51,8 @@ const ViewNote = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-red-100">
-          <div className="flex items-center gap-3 text-red-600 mb-4">
-            <AlertCircle className="w-6 h-6" />
-            <h2 className="text-xl font-semibold">Error</h2>
-          </div>
+        <div className="max-w-md w-full bg-white backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-red-100">
           <p className="text-gray-600 mb-6">{error}</p>
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-200"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Return to Notes List
-          </Link>
         </div>
       </div>
     );
@@ -83,7 +72,7 @@ const ViewNote = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 bg-white/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transition-all duration-200"
+            className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 bg-white backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transition-all duration-200"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Notes
