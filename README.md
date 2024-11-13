@@ -80,5 +80,3 @@ Follow these steps to get the project up and running on your local machine:
 * **Notes Operations**:
    * **Add Note**: Navigate to `/add-note`.
    * **View/Edit/Delete Notes**: Accessible from the notes list.
-
-Enjoy using and enhancing the app! 😊
